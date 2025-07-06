@@ -1,4 +1,4 @@
-package com.example.loginscreenlinkdev
+package com.example.loginscreenlinkdev.viewModel
 
 import android.util.Patterns
 import androidx.compose.runtime.mutableStateOf
