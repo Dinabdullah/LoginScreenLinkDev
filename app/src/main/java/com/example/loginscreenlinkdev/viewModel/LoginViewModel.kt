@@ -7,20 +7,21 @@ import androidx.lifecycle.ViewModel
 class LoginViewModel : ViewModel() {
 
     val email = mutableStateOf("")
+    val name = mutableStateOf("")
     val emailError = mutableStateOf<String?>(null)
     val password = mutableStateOf("")
+    val conPassword = mutableStateOf("")
     val passwordError = mutableStateOf<String?>(null)
     val rememberMe = mutableStateOf(false)
+    val confirmPasswordError = mutableStateOf<String?>(null)
 
-    fun onLoginClick() {
 
+    fun onLoginClick(): Boolean {
         val isEmailValid = validateEmail()
         val isPasswordValid = validatePassword()
-
-        if (isEmailValid && isPasswordValid) {
-
-        }
+        return isEmailValid && isPasswordValid
     }
+
 
     private fun validateEmail(): Boolean {
         return when {
@@ -59,5 +60,25 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
+
+    fun validateConfirmPassword(): Boolean {
+        return when {
+            conPassword.value.isBlank() -> {
+                confirmPasswordError.value = "Confirm password is required"
+                false
+            }
+
+            conPassword.value != password.value -> {
+                confirmPasswordError.value = "Passwords do not match"
+                false
+            }
+
+            else -> {
+                confirmPasswordError.value = null
+                true
+            }
+        }
+    }
+
 
 }

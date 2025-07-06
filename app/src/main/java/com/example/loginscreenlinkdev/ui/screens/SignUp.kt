@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -42,15 +44,16 @@ import com.example.loginscreenlinkdev.ui.components.TopEndIcon
 import com.example.loginscreenlinkdev.ui.components.TopStartIcon
 import com.example.loginscreenlinkdev.viewModel.LoginViewModel
 
-
 @Composable
-fun LoginScreen(
+fun SignUp(
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel,
     navController: NavHostController
 ) {
     val email = viewModel.email
+    val name = viewModel.name
     val password = viewModel.password
+    val conPassword = viewModel.conPassword
     val rememberMe = viewModel.rememberMe
     val passwordVisible = remember { mutableStateOf(false) }
 
@@ -74,13 +77,17 @@ fun LoginScreen(
                 .size(400.dp)
         )
 
+        val scrollState = rememberScrollState()
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .verticalScroll(scrollState)
                 .padding(dimensionResource(R.dimen.screen_padding)),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -88,13 +95,27 @@ fun LoginScreen(
                         start = dimensionResource(R.dimen.login_text_start_padding),
                         top = dimensionResource(R.dimen.login_top_padding)
                     ),
-                text = stringResource(R.string.login),
+                text = stringResource(R.string.create_an_account),
                 fontWeight = FontWeight.Black,
-                fontSize = dimensionResource(R.dimen.font_header).value.sp,
+                fontSize = dimensionResource(R.dimen.font_body).value.sp,
                 textAlign = TextAlign.Start
             )
 
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.field_padding_vertical)))
+
+            CustomTextField(
+                value = name.value,
+                onValueChange = { name.value = it },
+                labelResId = R.string.name,
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.person),
+                        modifier = Modifier.size(dimensionResource(R.dimen.icon_size)),
+                        contentDescription = null,
+                        tint = colorResource(R.color.app_yellow)
+                    )
+                }
+            )
 
             CustomTextField(
                 value = email.value,
@@ -147,7 +168,6 @@ fun LoginScreen(
                 },
                 visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation()
             )
-
             if (viewModel.passwordError.value != null) {
                 Text(
                     text = viewModel.passwordError.value!!,
@@ -159,25 +179,58 @@ fun LoginScreen(
                 )
             }
 
+
+            CustomTextField(
+                value = conPassword.value,
+                onValueChange = { conPassword.value = it },
+                labelResId = R.string.conpassword,
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.pass),
+                        contentDescription = null,
+                        modifier = Modifier.size(dimensionResource(R.dimen.icon_size)),
+
+                        tint = colorResource(R.color.app_yellow)
+                    )
+                },
+                trailingIcon = {
+                    val icon =
+                        if (passwordVisible.value) R.drawable.baseline_remove_red_eye_24 else R.drawable.el_eye_close
+                    IconButton(onClick = { passwordVisible.value = !passwordVisible.value }) {
+                        Icon(
+                            painter = painterResource(id = icon),
+                            contentDescription = null,
+                            modifier = Modifier.size(dimensionResource(R.dimen.icon_size))
+                        )
+                    }
+                },
+                visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation()
+            )
+            if (viewModel.confirmPasswordError.value != null) {
+                Text(
+                    text = viewModel.confirmPasswordError.value!!,
+                    color = colorResource(R.color.text_error),
+                    fontSize = dimensionResource(R.dimen.font_small).value.sp,
+                    modifier = Modifier
+                        .padding(start = 8.dp)
+                        .align(Alignment.Start)
+                )
+            }
+
+
+
+
             RememberMeRow(rememberMe = rememberMe)
 
             CustomButton(
-                text = stringResource(R.string.login_capital),
-                onClick = {
-                    val isValid = viewModel.onLoginClick() && viewModel.validateConfirmPassword()
-                    if (isValid) {
-                        navController.navigate(Screen.Login.route) // أو أي شاشة أخرى
-                    }
-                }
-
+                text = stringResource(R.string._capital),
+                onClick = { viewModel.onLoginClick() }
             )
-
-
             DonotHaveAccRow(
-                firstText = "Don’t have an account?",
-                actionText = "Sign Up",
+                firstText = stringResource(R.string.already_have_an_account),
+                actionText = stringResource(R.string.login_small),
                 onActionClick = {
-                    navController.navigate(Screen.SignUp.route)
+                    navController.navigate(Screen.Login.route)
                 }
             )
         }
@@ -186,7 +239,7 @@ fun LoginScreen(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun LoginScreenPreview() {
+fun SignUpPreview() {
     val navController = rememberNavController()
     SignUp(viewModel = LoginViewModel(), navController = navController)
 }

@@ -2,10 +2,16 @@
     <string name="app_name">LoginScreenLinkDev</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
+    <string name="name">Name</string>
     <string name="password">Password</string>
+    <string name="conpassword">Confirm Password</string>
     <string name="remember_me">Remember me</string>
     <string name="forget_password">Forget password?</string>
     <string name="don_t_have_an_account">"Don’t have an account? "</string>
     <string name="sign_up">Sign Up</string>
     <string name="login_capital">LOGIN</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="_capital">SIGN UP</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="login_small">Login</string>
 </resources>

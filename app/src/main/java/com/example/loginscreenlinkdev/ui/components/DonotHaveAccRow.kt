@@ -15,21 +15,24 @@ import com.example.loginscreenlinkdev.R
 
 @Composable
 fun DonotHaveAccRow(
-    onSignUpClick: () -> Unit = {}
+    firstText: String,
+    actionText: String,
+    onActionClick: () -> Unit
 ) {
     Row {
         Text(
-            text = stringResource(R.string.don_t_have_an_account),
+            text = firstText,
             fontSize = dimensionResource(R.dimen.font_small).value.sp
         )
         Text(
-            text = stringResource(R.string.sign_up),
+            text = actionText,
             color = colorResource(R.color.app_yellow),
             fontWeight = FontWeight.Bold,
             textDecoration = TextDecoration.Underline,
-            modifier = Modifier.clickable { onSignUpClick() },
+            modifier = Modifier.clickable { onActionClick() },
             fontSize = 14.sp
         )
     }
 }
+
 

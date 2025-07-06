@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.loginscreenlinkdev.ui.screens.LoginScreen
+import androidx.navigation.compose.rememberNavController
 import com.example.loginscreenlinkdev.ui.theme.LoginScreenLinkDevTheme
 import com.example.loginscreenlinkdev.viewModel.LoginViewModel
 
@@ -17,12 +17,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
+            val navController = rememberNavController()
+            val loginViewModel: LoginViewModel = viewModel()
+
             LoginScreenLinkDevTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
-                    val loginViewModel: LoginViewModel = viewModel()
-                    LoginScreen(
-                        modifier = Modifier.padding(),
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { _ ->
+                    AppNavigation(
+                        navController = navController,
                         viewModel = loginViewModel
                     )
                 }
