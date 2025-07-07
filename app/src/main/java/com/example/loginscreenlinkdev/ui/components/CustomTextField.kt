@@ -15,13 +15,14 @@ import com.example.loginscreenlinkdev.R
 
 @Composable
 fun CustomTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     labelResId: Int,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    modifier: Modifier = Modifier
+
 ) {
     TextField(
         value = value,
@@ -30,7 +31,7 @@ fun CustomTextField(
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         visualTransformation = visualTransformation,
-        modifier = modifier.padding(vertical = dimensionResource(R.dimen.field_padding_vertical)),
+        modifier = modifier.padding(vertical = dimensionResource(R.dimen.field_padding_vertical), horizontal = dimensionResource(R.dimen.screen_padding)),
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = Color.White,
             focusedContainerColor = Color.White,

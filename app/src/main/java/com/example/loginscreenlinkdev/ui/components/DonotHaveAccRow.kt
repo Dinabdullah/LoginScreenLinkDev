@@ -15,14 +15,14 @@ import com.example.loginscreenlinkdev.R
 
 @Composable
 fun DonotHaveAccRow(
-    firstText: String,
+    firstText: String, //label text
     actionText: String,
     onActionClick: () -> Unit
 ) {
-    Row {
+    Row { //add clik
         Text(
             text = firstText,
-            fontSize = dimensionResource(R.dimen.font_small).value.sp
+            fontSize = dimensionResource(R.dimen.font_body).value.sp
         )
         Text(
             text = actionText,
@@ -30,7 +30,7 @@ fun DonotHaveAccRow(
             fontWeight = FontWeight.Bold,
             textDecoration = TextDecoration.Underline,
             modifier = Modifier.clickable { onActionClick() },
-            fontSize = 14.sp
+            fontSize = dimensionResource(R.dimen.font_body).value.sp
         )
     }
 }

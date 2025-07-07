@@ -9,15 +9,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.example.loginscreenlinkdev.R
 
 @Composable
 fun TopStartIcon(
-    padding: Dp = 42.dp,
-    size: Dp = 36.dp
+    padding: Dp = dimensionResource(R.dimen.top_icon_padding),
+    size: Dp = dimensionResource(R.dimen.top_icon_size)
+
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -35,8 +36,8 @@ fun TopStartIcon(
 
 @Composable
 fun TopEndIcon(
-    padding: Dp = 42.dp,
-    size: Dp = 30.dp
+    padding: Dp = dimensionResource(R.dimen.top_icon_padding),
+    size: Dp = dimensionResource(R.dimen.top_end_icon_size)
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(

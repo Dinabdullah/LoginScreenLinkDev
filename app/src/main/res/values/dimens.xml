@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="screen_padding">32dp</dimen>
+    <dimen name="screen_padding">24dp</dimen>
+    <dimen name="padding_remember">12dp</dimen>
     <dimen name="field_padding_vertical">12dp</dimen>
+    <dimen name="padding_vertical">8dp</dimen>
     <dimen name="login_top_padding">160dp</dimen>
-    <dimen name="login_text_start_padding">44dp</dimen>
+    <dimen name="login_text_start_padding">40dp</dimen>
     <dimen name="icon_size">24dp</dimen>
     <dimen name="button_height">48dp</dimen>
     <dimen name="button_padding_vertical">24dp</dimen>
     <dimen name="font_header">40sp</dimen>
     <dimen name="font_body">16sp</dimen>
     <dimen name="font_small">12sp</dimen>
+    <dimen name="top_icon_padding">42dp</dimen>
+    <dimen name="top_icon_size">32dp</dimen>
+    <dimen name="top_end_icon_size">32dp</dimen>
+    <dimen name="font_action_text">16sp</dimen>
+
 </resources>

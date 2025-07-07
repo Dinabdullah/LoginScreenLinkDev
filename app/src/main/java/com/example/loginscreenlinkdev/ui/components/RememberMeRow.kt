@@ -4,6 +4,7 @@ package com.example.loginscreenlinkdev.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Text
@@ -20,7 +21,12 @@ import com.example.loginscreenlinkdev.R
 @Composable
 fun RememberMeRow(rememberMe: MutableState<Boolean>) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = dimensionResource(R.dimen.padding_remember)
+            ),
+
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -35,8 +41,7 @@ fun RememberMeRow(rememberMe: MutableState<Boolean>) {
             )
             Text(
                 text = stringResource(R.string.remember_me),
-                fontSize = dimensionResource(R.dimen.font_small).value.sp
-            )
+                fontSize = dimensionResource(R.dimen.font_small).value.sp            )
         }
 
         Text(

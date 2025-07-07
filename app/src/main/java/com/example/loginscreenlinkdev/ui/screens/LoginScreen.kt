@@ -1,6 +1,7 @@
 package com.example.loginscreenlinkdev.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -54,8 +56,9 @@ fun LoginScreen(
     val rememberMe = viewModel.rememberMe
     val passwordVisible = remember { mutableStateOf(false) }
 
-    Box(modifier = modifier.fillMaxSize()) {
-        Image(
+    Box(modifier = modifier.fillMaxSize()
+        .background(Color.White)) {
+        Image(       //login screen header
             painter = painterResource(id = R.drawable.group1),
             contentDescription = null,
             modifier = Modifier
@@ -81,7 +84,7 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
+            Text( //login form
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -188,5 +191,5 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPreview() {
     val navController = rememberNavController()
-    SignUp(viewModel = LoginViewModel(), navController = navController)
+    LoginScreen(viewModel = LoginViewModel(), navController = navController)
 }

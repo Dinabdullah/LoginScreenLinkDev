@@ -27,7 +27,7 @@ fun CustomButton(
         colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.button_yellow)),
         shape = RoundedCornerShape(6.dp),
         modifier = modifier
-            .padding(vertical = dimensionResource(R.dimen.button_padding_vertical))
+            .padding(vertical = dimensionResource(R.dimen.button_padding_vertical), horizontal = dimensionResource(R.dimen.screen_padding))
             .fillMaxWidth()
             .height(dimensionResource(R.dimen.button_height))
     ) {
