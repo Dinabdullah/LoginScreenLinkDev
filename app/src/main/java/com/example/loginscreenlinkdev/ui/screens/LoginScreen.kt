@@ -16,7 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -48,30 +47,6 @@ fun LoginScreen(
     val password = viewModel.password
     val rememberMe = viewModel.rememberMe
     val passwordVisible = remember { mutableStateOf(false) }
-    val context = LocalContext.current
-    val isValid = viewModel.onLoginClick()
-
-    if (!viewModel.validateEmail()) {
-        viewModel.emailError.value = if (viewModel.email.value.isBlank())
-            context.getString(R.string.error_email_required)
-        else
-            context.getString(R.string.error_email_invalid)
-    } else {
-        viewModel.emailError.value = null
-    }
-
-    if (!viewModel.validatePassword()) {
-        viewModel.passwordError.value = if (viewModel.password.value.isBlank())
-            context.getString(R.string.error_password_required)
-        else
-            context.getString(R.string.error_password_short)
-    } else {
-        viewModel.passwordError.value = null
-    }
-
-    if (isValid) {
-        navController.navigate(Screen.Login.route)
-    }
 
     HeaderBackgroundBox {
         Column(
@@ -165,13 +140,14 @@ fun LoginScreen(
                 onClick = {
                     val isValid = viewModel.onLoginClick()
                     if (isValid) {
-                        navController.navigate(Screen.Login.route)
                     }
                 }
             )
 
+
+
             DonotHaveAccRow(
-                labelText = stringResource( R.string.don_t_have_an_account),
+                labelText = stringResource(R.string.don_t_have_an_account),
                 actionText = stringResource(R.string.sign_up_),
                 onActionClick = {
                     navController.navigate(Screen.SignUp.route)

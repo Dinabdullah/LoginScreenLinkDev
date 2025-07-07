@@ -21,7 +21,22 @@ class LoginViewModel : ViewModel() {
     }
 
     fun onLoginClick(): Boolean {
-        return validateEmail() && validatePassword()
+        val isEmailValid = validateEmail().also {
+            emailError.value = if (!it) {
+                if (email.value.isBlank()) "Email is required"
+                else "Invalid email format"
+            } else null
+        }
+
+        val isPasswordValid = validatePassword().also {
+            passwordError.value = if (!it) {
+                if (password.value.isBlank()) "Password is required"
+                else "Password must be at least 6 characters"
+            } else null
+        }
+
+        return isEmailValid && isPasswordValid
     }
+
 }
 
