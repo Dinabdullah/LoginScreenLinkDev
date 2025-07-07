@@ -5,80 +5,23 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 class LoginViewModel : ViewModel() {
-
     val email = mutableStateOf("")
-    val name = mutableStateOf("")
-    val emailError = mutableStateOf<String?>(null)
     val password = mutableStateOf("")
-    val conPassword = mutableStateOf("")
-    val passwordError = mutableStateOf<String?>(null)
     val rememberMe = mutableStateOf(false)
-    val confirmPasswordError = mutableStateOf<String?>(null)
 
+    val emailError = mutableStateOf<String?>(null)
+    val passwordError = mutableStateOf<String?>(null)
+
+    fun validateEmail(): Boolean {
+        return email.value.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(email.value).matches()
+    }
+
+    fun validatePassword(): Boolean {
+        return password.value.length >= 6
+    }
 
     fun onLoginClick(): Boolean {
-        val isEmailValid = validateEmail()
-        val isPasswordValid = validatePassword()
-        return isEmailValid && isPasswordValid
+        return validateEmail() && validatePassword()
     }
-
-
-    private fun validateEmail(): Boolean {
-        return when {
-            email.value.isBlank() -> {
-                emailError.value = "Email is required"
-                false
-            }
-
-            !Patterns.EMAIL_ADDRESS.matcher(email.value).matches() -> {
-                emailError.value = "Invalid email format"
-                false
-            }
-
-            else -> {
-                emailError.value = null
-                true
-            }
-        }
-    }
-
-    private fun validatePassword(): Boolean {
-        return when {
-            password.value.isBlank() -> {
-                passwordError.value = "Password is required"
-                false
-            }
-
-            password.value.length < 6 -> {
-                passwordError.value = "Password must be at least 6 characters"
-                false
-            }
-
-            else -> {
-                passwordError.value = null
-                true
-            }
-        }
-    }
-
-    fun validateConfirmPassword(): Boolean {
-        return when {
-            conPassword.value.isBlank() -> {
-                confirmPasswordError.value = "Confirm password is required"
-                false
-            }
-
-            conPassword.value != password.value -> {
-                confirmPasswordError.value = "Passwords do not match"
-                false
-            }
-
-            else -> {
-                confirmPasswordError.value = null
-                true
-            }
-        }
-    }
-
-
 }
+

@@ -44,12 +44,12 @@ import com.example.loginscreenlinkdev.ui.components.DonotHaveAccRow
 import com.example.loginscreenlinkdev.ui.components.RememberMeRow
 import com.example.loginscreenlinkdev.ui.components.TopEndIcon
 import com.example.loginscreenlinkdev.ui.components.TopStartIcon
-import com.example.loginscreenlinkdev.viewModel.LoginViewModel
+import com.example.loginscreenlinkdev.viewModel.SignUpViewModel
 
 @Composable
 fun SignUp(
     modifier: Modifier = Modifier,
-    viewModel: LoginViewModel,
+    viewModel: SignUpViewModel,
     navController: NavHostController
 ) {
     val email = viewModel.email
@@ -154,7 +154,6 @@ fun SignUp(
                         painter = painterResource(id = R.drawable.pass),
                         contentDescription = null,
                         modifier = Modifier.size(dimensionResource(R.dimen.icon_size)),
-
                         tint = colorResource(R.color.app_yellow)
                     )
                 },
@@ -177,11 +176,10 @@ fun SignUp(
                     color = colorResource(R.color.text_error),
                     fontSize = dimensionResource(R.dimen.font_small).value.sp,
                     modifier = Modifier
-                        .padding(start = 8.dp)
+                        .padding(start = dimensionResource(R.dimen.padding_vertical))
                         .align(Alignment.Start)
                 )
             }
-
 
             CustomTextField(
                 value = conPassword.value,
@@ -192,7 +190,6 @@ fun SignUp(
                         painter = painterResource(id = R.drawable.pass),
                         contentDescription = null,
                         modifier = Modifier.size(dimensionResource(R.dimen.icon_size)),
-
                         tint = colorResource(R.color.app_yellow)
                     )
                 },
@@ -220,17 +217,15 @@ fun SignUp(
                 )
             }
 
-
-
-
             RememberMeRow(rememberMe = rememberMe)
 
             CustomButton(
                 text = stringResource(R.string._capital),
-                onClick = { viewModel.onLoginClick() }
+                onClick = { viewModel.onSignUpClick() }
             )
+
             DonotHaveAccRow(
-                firstText = stringResource(R.string.already_have_an_account),
+                labelText = stringResource(R.string.already_have_an_account),
                 actionText = stringResource(R.string.login_small),
                 onActionClick = {
                     navController.navigate(Screen.Login.route)
@@ -244,5 +239,5 @@ fun SignUp(
 @Composable
 fun SignUpPreview() {
     val navController = rememberNavController()
-    SignUp(viewModel = LoginViewModel(), navController = navController)
+    SignUp(viewModel = SignUpViewModel(), navController = navController)
 }

@@ -1,9 +1,6 @@
 package com.example.loginscreenlinkdev.ui.screens
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -20,7 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -39,15 +35,12 @@ import com.example.loginscreenlinkdev.Screen
 import com.example.loginscreenlinkdev.ui.components.CustomButton
 import com.example.loginscreenlinkdev.ui.components.CustomTextField
 import com.example.loginscreenlinkdev.ui.components.DonotHaveAccRow
+import com.example.loginscreenlinkdev.ui.components.HeaderBackgroundBox
 import com.example.loginscreenlinkdev.ui.components.RememberMeRow
-import com.example.loginscreenlinkdev.ui.components.TopEndIcon
-import com.example.loginscreenlinkdev.ui.components.TopStartIcon
 import com.example.loginscreenlinkdev.viewModel.LoginViewModel
-
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier,
     viewModel: LoginViewModel,
     navController: NavHostController
 ) {
@@ -55,28 +48,32 @@ fun LoginScreen(
     val password = viewModel.password
     val rememberMe = viewModel.rememberMe
     val passwordVisible = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val isValid = viewModel.onLoginClick()
 
-    Box(modifier = modifier.fillMaxSize()
-        .background(Color.White)) {
-        Image(       //login screen header
-            painter = painterResource(id = R.drawable.group1),
-            contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .width(356.dp)
-                .height(386.dp)
-        )
-        TopStartIcon()
-        TopEndIcon()
+    if (!viewModel.validateEmail()) {
+        viewModel.emailError.value = if (viewModel.email.value.isBlank())
+            context.getString(R.string.error_email_required)
+        else
+            context.getString(R.string.error_email_invalid)
+    } else {
+        viewModel.emailError.value = null
+    }
 
-        Image(
-            painter = painterResource(id = R.drawable.rectangle5),
-            contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .size(400.dp)
-        )
+    if (!viewModel.validatePassword()) {
+        viewModel.passwordError.value = if (viewModel.password.value.isBlank())
+            context.getString(R.string.error_password_required)
+        else
+            context.getString(R.string.error_password_short)
+    } else {
+        viewModel.passwordError.value = null
+    }
 
+    if (isValid) {
+        navController.navigate(Screen.Login.route)
+    }
+
+    HeaderBackgroundBox {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -84,7 +81,7 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text( //login form
+            Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -133,7 +130,6 @@ fun LoginScreen(
                         painter = painterResource(id = R.drawable.pass),
                         contentDescription = null,
                         modifier = Modifier.size(dimensionResource(R.dimen.icon_size)),
-
                         tint = colorResource(R.color.app_yellow)
                     )
                 },
@@ -167,18 +163,16 @@ fun LoginScreen(
             CustomButton(
                 text = stringResource(R.string.login_capital),
                 onClick = {
-                    val isValid = viewModel.onLoginClick() && viewModel.validateConfirmPassword()
+                    val isValid = viewModel.onLoginClick()
                     if (isValid) {
-                        navController.navigate(Screen.Login.route) // أو أي شاشة أخرى
+                        navController.navigate(Screen.Login.route)
                     }
                 }
-
             )
 
-
             DonotHaveAccRow(
-                firstText = "Don’t have an account?",
-                actionText = "Sign Up",
+                labelText = stringResource( R.string.don_t_have_an_account),
+                actionText = stringResource(R.string.sign_up_),
                 onActionClick = {
                     navController.navigate(Screen.SignUp.route)
                 }

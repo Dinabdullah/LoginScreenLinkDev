@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                 ) { _ ->
                     AppNavigation(
                         navController = navController,
-                        viewModel = loginViewModel
+                        loginViewModel = loginViewModel
                     )
                 }
             }

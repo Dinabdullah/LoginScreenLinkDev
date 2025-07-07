@@ -14,4 +14,10 @@
     <string name="_capital">SIGN UP</string>
     <string name="already_have_an_account">Already have an account ?</string>
     <string name="login_small">Login</string>
+    <string name="error_email_required">Email is required</string>
+    <string name="error_email_invalid">Invalid email format</string>
+    <string name="error_password_required">Password is required</string>
+    <string name="error_password_short">Password must be at least 6 characters</string>
+    <string name="sign_up_">Sign Up</string>
+
 </resources>
