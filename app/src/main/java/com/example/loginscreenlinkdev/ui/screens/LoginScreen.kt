@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -91,7 +92,7 @@ fun LoginScreen(
                     color = colorResource(R.color.text_error),
                     fontSize = dimensionResource(R.dimen.font_small).value.sp,
                     modifier = Modifier
-                        .padding(start = 8.dp)
+                        .padding(start = dimensionResource(R.dimen.padding_vertical))
                         .align(Alignment.Start)
                 )
             }
@@ -135,10 +136,12 @@ fun LoginScreen(
 
             RememberMeRow(rememberMe = rememberMe)
 
+            val context = LocalContext.current
+
             CustomButton(
                 text = stringResource(R.string.login_capital),
                 onClick = {
-                    val isValid = viewModel.onLoginClick()
+                    val isValid = viewModel.onLoginClick(context)
                     if (isValid) {
                     }
                 }
@@ -148,7 +151,7 @@ fun LoginScreen(
 
             DonotHaveAccRow(
                 labelText = stringResource(R.string.don_t_have_an_account),
-                actionText = stringResource(R.string.sign_up_),
+                actionText = stringResource(R.string.sign_up),
                 onActionClick = {
                     navController.navigate(Screen.SignUp.route)
                 }

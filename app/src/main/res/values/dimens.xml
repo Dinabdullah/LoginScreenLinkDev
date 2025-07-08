@@ -4,6 +4,7 @@
     <dimen name="padding_remember">12dp</dimen>
     <dimen name="width">356dp</dimen>
     <dimen name="height">386dp</dimen>
+    <dimen name="size">400dp</dimen>
     <dimen name="field_padding_vertical">12dp</dimen>
     <dimen name="padding_vertical">8dp</dimen>
     <dimen name="round_courner">6dp</dimen>

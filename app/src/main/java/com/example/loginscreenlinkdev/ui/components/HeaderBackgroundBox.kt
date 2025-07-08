@@ -41,7 +41,7 @@ fun HeaderBackgroundBox(
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .size(400.dp)
+                .size(dimensionResource(R.dimen.size))
         )
 
         TopStartIcon(

@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -108,7 +109,7 @@ fun SignUp(
                     color = colorResource(R.color.text_error),
                     fontSize = dimensionResource(R.dimen.font_small).value.sp,
                     modifier = Modifier
-                        .padding(start = 8.dp)
+                        .padding(start = dimensionResource(R.dimen.screen_padding))
                         .align(Alignment.Start)
                 )
             }
@@ -186,11 +187,12 @@ fun SignUp(
             }
 
             RememberMeRow(rememberMe = rememberMe)
+            val context = LocalContext.current
 
             CustomButton(
                 text = stringResource(R.string._capital),
                 onClick = {
-                    val isValid = viewModel.onSignUpClick()
+                    val isValid = viewModel.onSignUpClick(context)
                     if (isValid) {
 
                     }
@@ -200,7 +202,7 @@ fun SignUp(
 
             DonotHaveAccRow(
                 labelText = stringResource(R.string.already_have_an_account),
-                actionText = stringResource(R.string.login_small),
+                actionText = stringResource(R.string.login),
                 onActionClick = {
                     navController.navigate(Screen.Login.route)
                 }

@@ -13,11 +13,12 @@
     <string name="create_an_account">Create an account</string>
     <string name="_capital">SIGN UP</string>
     <string name="already_have_an_account">Already have an account ?</string>
-    <string name="login_small">Login</string>
     <string name="error_email_required">Email is required</string>
     <string name="error_email_invalid">Invalid email format</string>
     <string name="error_password_required">Password is required</string>
     <string name="error_password_short">Password must be at least 6 characters</string>
-    <string name="sign_up_">Sign Up</string>
+    <string name="error_confirm_password_required">Confirm password is required</string>
+    <string name="error_passwords_do_not_match">Passwords do not match</string>
+
 
 </resources>

@@ -1,8 +1,10 @@
 package com.example.loginscreenlinkdev.viewModel
 
+import android.content.Context
 import android.util.Patterns
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.loginscreenlinkdev.R
 
 class LoginViewModel : ViewModel() {
     val email = mutableStateOf("")
@@ -20,23 +22,24 @@ class LoginViewModel : ViewModel() {
         return password.value.length >= 6
     }
 
-    fun onLoginClick(): Boolean {
+    fun onLoginClick(context: Context): Boolean {
         val isEmailValid = validateEmail().also {
             emailError.value = if (!it) {
-                if (email.value.isBlank()) "Email is required"
-                else "Invalid email format"
+                if (email.value.isBlank()) context.getString(R.string.error_email_required)
+                else context.getString(R.string.error_email_invalid)
             } else null
         }
 
         val isPasswordValid = validatePassword().also {
             passwordError.value = if (!it) {
-                if (password.value.isBlank()) "Password is required"
-                else "Password must be at least 6 characters"
+                if (password.value.isBlank()) context.getString(R.string.error_password_required)
+                else context.getString(R.string.error_password_short)
             } else null
         }
 
         return isEmailValid && isPasswordValid
     }
+
 
 }
 
