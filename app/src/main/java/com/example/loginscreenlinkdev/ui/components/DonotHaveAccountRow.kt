@@ -18,7 +18,7 @@ fun DonotHaveAccRow(
     actionText: String,
     onActionClick: () -> Unit
 ) {
-    Row( modifier = Modifier.clickable { onActionClick() },) {
+    Row(modifier = Modifier.clickable { onActionClick() }) {
         Text(
             text = labelText,
             fontSize = dimensionResource(R.dimen.font_body).value.sp

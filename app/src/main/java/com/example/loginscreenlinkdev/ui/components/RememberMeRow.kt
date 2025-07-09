@@ -41,7 +41,8 @@ fun RememberMeRow(rememberMe: MutableState<Boolean>) {
             )
             Text(
                 text = stringResource(R.string.remember_me),
-                fontSize = dimensionResource(R.dimen.font_small).value.sp            )
+                fontSize = dimensionResource(R.dimen.font_small).value.sp
+            )
         }
 
         Text(

@@ -23,7 +23,7 @@ fun CustomTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 
-) {
+    ) {
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -31,7 +31,10 @@ fun CustomTextField(
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         visualTransformation = visualTransformation,
-        modifier = modifier.padding(vertical = dimensionResource(R.dimen.field_padding_vertical), horizontal = dimensionResource(R.dimen.screen_padding)),
+        modifier = modifier.padding(
+            vertical = dimensionResource(R.dimen.field_padding_vertical),
+            horizontal = dimensionResource(R.dimen.screen_padding)
+        ),
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = Color.White,
             focusedContainerColor = Color.White,
